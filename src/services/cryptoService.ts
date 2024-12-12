@@ -4,10 +4,8 @@ import { BASE_URL, COINS_ENDPOINT } from '../constants/apiConstants';
 export interface CryptoCoin {
   id: string;
   name: string;
-  current_price: number;
   symbol: string;
   image: string;
-  last_updated_at: number;
 }
 
 export const fetchCryptos = async (): Promise<CryptoCoin[]> => {
@@ -27,7 +25,6 @@ export const fetchCryptos = async (): Promise<CryptoCoin[]> => {
   return response.data.map((coin: CryptoCoin) => ({
     id: coin.id,
     name: coin.name,
-    current_price: coin.current_price,
     symbol: coin.symbol,
     image: coin.image,
   }));
