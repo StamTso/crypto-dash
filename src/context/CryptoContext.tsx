@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef, ReactNode } from 'react';
 import { toast } from 'react-toastify';
-import { fetchCryptos, CryptoCoin } from '../services/cryptoService';
-import { fetchLivePrices, PriceData } from '../services/priceService';
+import { fetchCryptos } from '../services/cryptoService';
+import { fetchLivePrices } from '../services/priceService';
 import { CryptoContext, PriceEntry } from '../hooks/useCryptoContext';
 import { moveCoin } from '../utils/moveCoin';
 import { DroppableId } from '../features/DashBoard/types';
 import { UNWATCHED_COLUMN_ID, WATCHED_COLUMN_ID } from '../constants/dashBoardConstants';
+import { CryptoCoin, PriceData } from '../services/types';
 
 export const CryptoProvider = ({ children }: { children: ReactNode }) => {
   const [unwatchedCoins, setUnwatchedCoins] = useState<CryptoCoin[]>([]);
@@ -141,6 +142,7 @@ export const CryptoProvider = ({ children }: { children: ReactNode }) => {
             result.updatedFromColumn,
             WATCHED_COLUMN_ID,
             UNWATCHED_COLUMN_ID,
+            sourceIndex,
             destinationIndex
           )
 

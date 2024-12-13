@@ -33,15 +33,6 @@ describe('moveCoin Function', () => {
         ]);
     });
 
-    it('throws an error if destinationIndex is undefined when moving between columns', () => {
-        const fromList = mockUnwatchedCoins;
-        const toList = mockWatchedCoins;
-
-        expect(() =>
-            moveCoin('1', fromList, toList, UNWATCHED_COLUMN_ID, WATCHED_COLUMN_ID)
-        ).toThrow('destinationIndex is required when moving between columns');
-    });
-
     it('does nothing if the coin is not found in the fromList', () => {
         const fromList = mockUnwatchedCoins;
         const toList = mockWatchedCoins;
@@ -58,7 +49,7 @@ describe('moveCoin Function', () => {
         const result = moveCoin('bitcoin', fromList, [], WATCHED_COLUMN_ID, WATCHED_COLUMN_ID, 1, 10);
 
         expect(result.updatedFromColumn).toEqual([
-            { id: 'bitcoin', name: 'Bitcoin', symbol: 'btc', image: 'some/url/bitcoin.png' },        
+            { id: 'bitcoin', name: 'Bitcoin', symbol: 'btc', image: 'some/url/bitcoin.png' },
             { id: 'tether', name: 'Tether', symbol: 'usdt', image: 'some/url/tether.png' },
             { id: 'ethereum', name: 'Ethereum', symbol: 'eth', image: 'some/url/ethereum.png' },
         ]);

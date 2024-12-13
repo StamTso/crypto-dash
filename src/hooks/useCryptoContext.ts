@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
-import { CryptoCoin } from '../services/cryptoService';
 import { DroppableId } from '../features/DashBoard/types';
+import { CryptoCoin } from '../services/types';
 
 
 export interface CryptoContextType {

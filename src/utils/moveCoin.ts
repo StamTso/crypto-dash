@@ -1,4 +1,4 @@
-import { CryptoCoin } from '../services/cryptoService';
+import { CryptoCoin } from "../services/types";
 
 const moveWithinColumn = (
     column: CryptoCoin[],
@@ -40,11 +40,7 @@ export const moveCoin = (
     destinationIndex?: number
 ): { updatedFromColumn: CryptoCoin[]; updatedToColumn?: CryptoCoin[] } => {
 
-    if (destinationIndex === undefined) {
-        throw new Error('destinationIndex is required when moving between columns');
-    }
-
-    if (fromColumnId === toColumnId && sourceIndex !== undefined) {
+    if (fromColumnId === toColumnId && sourceIndex !== undefined && destinationIndex !== undefined) {
         const updatedColumn = moveWithinColumn(fromColumn, sourceIndex, destinationIndex);
         return { updatedFromColumn: updatedColumn };
     }

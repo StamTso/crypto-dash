@@ -1,10 +1,6 @@
 import axios from 'axios';
 import { BASE_URL, PRICES_ENDPOINT } from '../constants/apiConstants';
-
-export interface PriceData {
-    eur: number;
-    last_updated_at: number;
-}
+import { PriceData } from './types';
 
 export const fetchLivePrices = async (coinIds: string[]): Promise<Record<string, PriceData>> => {
   if (coinIds.length === 0) return {};
@@ -19,10 +15,9 @@ export const fetchLivePrices = async (coinIds: string[]): Promise<Record<string,
         },
       }
     );
-  
+
     return response.data as Record<string, PriceData>;
   } catch (error) {
     throw new Error(`Failed to fetch live prices. ${error}.`);
   }
-  
 };
