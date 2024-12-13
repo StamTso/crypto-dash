@@ -5,7 +5,7 @@ import BoardItem from './BoardItem';
 import { DroppableId } from './types';
 import { WATCHED_COLUMN_ID, UNWATCHED_COLUMN_ID } from '../../constants/dashBoardConstants';
 
-const DashBoard = () => {
+const DashBoard: React.FC = () => {
   const { unwatchedCoins, watchedCoins, moveCoin, loadingCoinsList, priceHistory, loadingChartDataCoins } = useCryptoContext();
 
   const handleDragEnd = (result: DropResult) => {
@@ -23,13 +23,13 @@ const DashBoard = () => {
   };
 
   return (
-    <DragDropContext onDragEnd={handleDragEnd}>
-      <div className="flex flex-row w-full min-h-screen h-max bg-gray-100 p-4 gap-4">
+    <DragDropContext onDragEnd={handleDragEnd} data-testid='drag-drop-context'>
+      <div className='flex flex-row w-full min-h-screen h-max bg-gray-100 p-4 gap-4'>
         <Droppable droppableId={UNWATCHED_COLUMN_ID}>
           {(provided) => (
             <BoardColumn
-              title="Unwatched"
-              width="w-1/4"
+              title='Unwatched'
+              width='w-1/4'
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
@@ -46,6 +46,7 @@ const DashBoard = () => {
                         <BoardItem
                           name={`${coin.name} (${coin.symbol.toUpperCase()})`}
                           imageUrl={coin.image}
+                          testId={coin.id}
                         />
                       </div>
                     )}
@@ -59,8 +60,8 @@ const DashBoard = () => {
         <Droppable droppableId={WATCHED_COLUMN_ID}>
           {(provided) => (
             <BoardColumn
-              title="Watched"
-              width="w-3/4"
+              title='Watched'
+              width='w-3/4'
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
@@ -75,8 +76,9 @@ const DashBoard = () => {
                       <BoardItem
                         name={`${coin.name} (${coin.symbol.toUpperCase()})`}
                         imageUrl={coin.image}
-                        priceHistory={priceHistory[coin.id] || []}                      
+                        priceHistory={priceHistory[coin.id] || []}
                         isLoading={loadingChartDataCoins.has(coin.id)}
+                        testId={coin.id}
                       />
                     </div>
                   )}

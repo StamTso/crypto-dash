@@ -5,7 +5,7 @@ import BoardColumn from '../BoardColumn';
 describe('BoardColumn Component', () => {
   it('renders correctly with title, children, and width props', () => {
     render(
-      <BoardColumn title="Test Column" width="w-1/2">
+      <BoardColumn title='Test Column' width='w-1/2'>
         <p>Child Content</p>
       </BoardColumn>
     );
@@ -19,13 +19,13 @@ describe('BoardColumn Component', () => {
 
   it('applies default styles and renders children in a flex column', () => {
     render(
-      <BoardColumn title="Styled Column" width="w-1/4">
+      <BoardColumn title='Styled Column' width='w-1/4'>
         <div>Child One</div>
         <div>Child Two</div>
       </BoardColumn>
     );
 
-  
+
     const column = screen.getByText('Styled Column').closest('div');
 
     expect(column).toHaveClass('flex flex-col bg-white shadow-md rounded-md p-4');
@@ -36,7 +36,7 @@ describe('BoardColumn Component', () => {
   it('forwards refs correctly', () => {
     const ref = vi.fn();
     render(
-      <BoardColumn title="Ref Column" width="w-1/3" ref={ref}>
+      <BoardColumn title='Ref Column' width='w-1/3' ref={ref}>
         <p>Ref Test</p>
       </BoardColumn>
     );

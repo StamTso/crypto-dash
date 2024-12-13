@@ -1,14 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import BoardItem from '../BoardItem';
-
-vi.mock('../../../components/PriceChart/PriceChart.tsx', () => ({
-  default: vi.fn(() => <div data-testid="mock-price-chart" />),
-}));
 
 describe('BoardItem Component', () => {
   it('renders the name and image correctly', () => {
-    render(<BoardItem name="Bitcoin" imageUrl="bitcoin.png" />);
+    render(<BoardItem name='Bitcoin' imageUrl='bitcoin.png' />);
 
     expect(screen.getByText('Bitcoin')).toBeInTheDocument();
 
@@ -18,7 +14,7 @@ describe('BoardItem Component', () => {
   });
 
   it('renders a loading message when isLoading is true', () => {
-    render(<BoardItem name="Bitcoin" isLoading={true} />);
+    render(<BoardItem name='Bitcoin' isLoading={true} />);
 
     expect(screen.getByText('Fetching Prices...')).toBeInTheDocument();
     expect(screen.queryByTestId('mock-price-chart')).not.toBeInTheDocument();
@@ -30,14 +26,14 @@ describe('BoardItem Component', () => {
       { price: 200, last_updated_at: 1670003600 },
     ];
 
-    render(<BoardItem name="Bitcoin" priceHistory={mockPriceHistory} isLoading={false} />);
+    render(<BoardItem name='Bitcoin' priceHistory={mockPriceHistory} isLoading={false} />);
 
     expect(screen.getByTestId('mock-price-chart')).toBeInTheDocument();
     expect(screen.queryByText('Fetching Prices...')).not.toBeInTheDocument();
   });
 
   it('handles missing imageUrl gracefully', () => {
-    render(<BoardItem name="Bitcoin" />);
+    render(<BoardItem name='Bitcoin' />);
 
     expect(screen.getByText('Bitcoin')).toBeInTheDocument();
 

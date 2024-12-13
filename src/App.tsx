@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-    <div className="flex items-center justify-center min-h-screen h-max bg-gray-100">
+    <div className='flex items-center justify-center min-h-screen h-max bg-gray-100'>
       <CryptoProvider>
         <ToastContainer />
         <DashBoard />

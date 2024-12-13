@@ -5,12 +5,12 @@ import { fetchLivePrices, PriceData } from '../services/priceService';
 import { CryptoContext, PriceEntry } from '../hooks/useCryptoContext';
 import { moveCoin } from '../utils/moveCoin';
 import { DroppableId } from '../features/DashBoard/types';
-import { UNWATCHED_COLUMN_ID } from '../constants/dashBoardConstants';
+import { UNWATCHED_COLUMN_ID, WATCHED_COLUMN_ID } from '../constants/dashBoardConstants';
 
 export const CryptoProvider = ({ children }: { children: ReactNode }) => {
   const [unwatchedCoins, setUnwatchedCoins] = useState<CryptoCoin[]>([]);
   const [watchedCoins, setWatchedCoins] = useState<CryptoCoin[]>([]);
-  const [loadingCoinsList, setLoadingCoinsList] = useState<boolean>(false);
+  const [loadingCoinsList, setLoadingCoinsList] = useState<boolean>(true);
   const [priceHistory, setPriceHistory] = useState<Record<string, PriceEntry[]>>({});
   const [loadingChartDataCoins, setLoadingChartDataCoins] = useState<Set<string>>(new Set());
 
@@ -45,19 +45,17 @@ export const CryptoProvider = ({ children }: { children: ReactNode }) => {
       }
     });
 
-    console.log(updatedPriceHistory);
     return updatedPriceHistory;
   }
 
   useEffect(() => {
     const loadCryptos = async () => {
-      setLoadingCoinsList(true);
       try {
         const data = await fetchCryptos();
         setUnwatchedCoins(data);
       } catch (error) {
         console.error('Error fetching data:', error);
-        toast.error('Failed to fetch coins list, check your network connection and refresh the page.',{
+        toast.error('Failed to fetch coins list, check your network connection and refresh the page.', {
           position: 'top-right',
           autoClose: 3000,
           hideProgressBar: false,
@@ -141,15 +139,15 @@ export const CryptoProvider = ({ children }: { children: ReactNode }) => {
             coinId,
             result.updatedToColumn || watchedCoins,
             result.updatedFromColumn,
-            'watched',
-            'unwatched',
+            WATCHED_COLUMN_ID,
+            UNWATCHED_COLUMN_ID,
             destinationIndex
           )
 
           setUnwatchedCoins(previous => rollbackResult.updatedToColumn || previous);
           setWatchedCoins(rollbackResult.updatedFromColumn);
 
-          toast.error(`Failed to fetch price data for ${coinId}. Returning to "Unwatched".`, {
+          toast.error(`Failed to fetch price data for ${coinId}. Returning to 'Unwatched'.`, {
             position: 'top-right',
             autoClose: 3000,
             hideProgressBar: false,

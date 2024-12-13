@@ -9,23 +9,27 @@ export interface CryptoCoin {
 }
 
 export const fetchCryptos = async (): Promise<CryptoCoin[]> => {
-  const response = await axios.get(
-    `${BASE_URL}${COINS_ENDPOINT}`,
-    {
-      params: {
-        vs_currency: 'usd',
-        order: 'market_cap_desc',
-        per_page: 20,
-        page: 1,
-        sparkline: false,
-      },
-    }
-  );
-
-  return response.data.map((coin: CryptoCoin) => ({
-    id: coin.id,
-    name: coin.name,
-    symbol: coin.symbol,
-    image: coin.image,
-  }));
+  try {
+    const response = await axios.get(
+      `${BASE_URL}${COINS_ENDPOINT}`,
+      {
+        params: {
+          vs_currency: 'eur',
+          order: 'market_cap_desc',
+          per_page: 20,
+          page: 1,
+          sparkline: false,
+        },
+      }
+    );
+  
+    return response.data.map((coin: CryptoCoin) => ({
+      id: coin.id,
+      name: coin.name,
+      symbol: coin.symbol,
+      image: coin.image,
+    }));
+  } catch(error) {
+    throw new Error(`Failed to fetch coins. ${error}`);
+  }
 };

@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from 'vitest';
 import PriceChart from '../PriceChart';
 
 vi.mock('react-chartjs-2', () => ({
-  Line: vi.fn(() => <div data-testid="mock-line-chart" />),
+  Line: vi.fn(() => <div data-testid='mock-line-chart' />),
 }));
 
 describe('PriceChart Component', () => {

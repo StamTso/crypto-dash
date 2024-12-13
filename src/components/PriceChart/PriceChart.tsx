@@ -26,14 +26,14 @@ const PriceChart: React.FC<PriceChartProps> = ({ priceHistory }) => {
                 data: priceHistory.map((entry) => entry.price),
                 borderColor: 'rgba(75, 192, 192, 1)',
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                tension: 0.4, // Smooth curve
+                tension: 0,
             },
         ],
     };
 
     const chartOptions = {
         responsive: true,
-        plugins: {legend: {display: false}},
+        plugins: { legend: { display: false } },
         scales: {
             x: {
                 title: {
